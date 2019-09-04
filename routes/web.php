@@ -22,6 +22,9 @@ $router->group(['prefix' => 'api/v1'], function($router) {
     $router->get('/movies/{id}/comments', ['uses' => 'MovieCommentController@index']);
     $router->post('/movies/{id}/comments', ['middleware' => 'api', 'uses' => 'MovieCommentController@store']);
     $router->get('/movies/{id}/comments/{commentId}', ['uses' => 'MovieCommentController@show']);
+
+    $router->get('/movies/{id}/characters', ['uses' => 'MovieCharacterController@index']);
+    $router->get('/movies/{id}/characters/{characterId}', ['uses' => 'MovieCharacterController@show']);
 });
 
 $router->get('/', function () use ($router) {

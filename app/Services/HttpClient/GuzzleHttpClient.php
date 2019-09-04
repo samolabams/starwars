@@ -8,6 +8,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Promise;
 
 class GuzzleHttpClient implements HttpClient
 {
@@ -41,5 +42,22 @@ class GuzzleHttpClient implements HttpClient
 		} catch (Exception $e) {
 			throw new HttpClientException($e->getMessage());
 		}
+    }
+
+    public function getAsync(array $urls): HttpResponse
+    {
+        $promises = array_map(function($url) {
+            return $this->client->getAsync($url);
+        }, $urls);
+
+        try {
+            $results = Promise\settle($promises)->wait();
+            return (new HttpResponse)->setBodyAsArray($results);
+        } catch (RequestException $e) {
+            $message = $e->hasResponse() ? Psr7\str($e->getResponse()) : $e->getMessage();
+            throw new HttpClientException($message);
+        } catch (Exception $e) {
+            throw new HttpClientException;
+        }
     }
 }
