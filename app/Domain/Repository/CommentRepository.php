@@ -33,7 +33,7 @@ class CommentRepository implements CommentRepositoryInterface
 
     public function getAllByMovieId(int $movieId, int $offset, int $limit): array
     {
-        $comments = DB::select('SELECT * FROM comments WHERE movie_id = ? ORDER BY content DESC LIMIT ?, ?', [$movieId, $offset, $limit]);
+        $comments = DB::select('SELECT * FROM comments WHERE movie_id = ? ORDER BY content DESC LIMIT ? OFFSET ?', [$movieId, $offset, $limit]);
 
         return $comments;
     }

@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->bigInteger('movie_id')->unsigned()->index();
             $table->string('content', 500);
             $table->string('commenter_ip_address');
-            $table->timestamps();
+            $table->dateTime('commented_at');
         });
     }
 
