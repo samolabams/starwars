@@ -11,7 +11,7 @@ class CommentRepository implements CommentRepositoryInterface
 {
     public function persist($comment): int
     {
-        $response = DB::insert('INSERT INTO comments(movie_id, content, commenter_ip_address, commented_at) VALUES (?, ?, ?, ?)', [$comment->movie->id, $comment->content, $comment->commenter_ip_address, $comment->commented_at]);
+        $response = DB::insert('INSERT INTO comments(movie_id, content, commenter_ip_address, commented_at) VALUES (?, ?, ?, ?)', [$comment->movie->id, $comment->content, $comment->commenterIpAddress, $comment->commentedAt]);
         $id = (int) DB::getPdo()->lastInsertId();
 
         return $id;
