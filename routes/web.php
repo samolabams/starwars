@@ -15,6 +15,9 @@ $router->group(['prefix' => 'api/v1'], function($router) {
     $router->get('/', function () use ($router) {
         return 'Welcome to StarWars API development.';
     });
+
+    $router->get('/movies', ['uses' => 'MovieController@index']);
+    $router->get('/movies/{id}', ['uses' => 'MovieController@show']);
 });
 
 $router->get('/', function () use ($router) {
