@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "/starwars/public/api/"
+            "url": "/api/"
         }
     ],
     "paths": {
