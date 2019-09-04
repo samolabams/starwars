@@ -1,0 +1,607 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "StarWars API",
+        "contact": {
+            "name": "Sam Olabamiji",
+            "email": "samolabams@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "/starwars/public/api/v1"
+        }
+    ],
+    "paths": {
+        "/movies/{movieId}/characters": {
+            "get": {
+                "tags": [
+                    "Character"
+                ],
+                "summary": "Get Movie Characters",
+                "operationId": "getMovieCharacters",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "The movie id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "The filter query: to filter by gender (male / female)",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "female"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "The sort query: to sort by name, gender or height (add -sort to sort in descending order. Example: -name)",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "-height"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Characters",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Character"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable: If the service is not available to process request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error503"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found: If the movie is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error404"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/movies/{movieId}/characters/{characterId}": {
+            "get": {
+                "tags": [
+                    "Character"
+                ],
+                "summary": "Get Movie Comments By Comment Id",
+                "operationId": "getMovieCharacterByCharacterId",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "The movie id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "characterId",
+                        "in": "path",
+                        "description": "The character id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Character",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Character"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable: If the service is not available to process request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error503"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found: If the movie and/or comment is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error404"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/movies/{movieId}/comments": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Get Movie Comments",
+                "operationId": "getMovieComments",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "The movie id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The comments page to retrieve",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "The number of records to retrieve",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comments",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Comment"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable: If the service is not available to process request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error503"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found: If the movie is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error404"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Store Movie Comment",
+                "operationId": "storeMovieComment",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "The movie id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "content"
+                                ],
+                                "properties": {
+                                    "content": {
+                                        "description": "The comment",
+                                        "type": "string",
+                                        "maximum": 500,
+                                        "example": "It's a hilarious movie"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Null response",
+                        "headers": {
+                            "Location": {
+                                "description": "A link to the stored comment",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error (Unprocessable entity)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error422"
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable: If the service is not available to process request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error503"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found: If the movie is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error404"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/movies/{movieId}/comments/{commentId}": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Get Movie Comments By Comment Id",
+                "operationId": "getMovieCommentByCommentId",
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "The movie id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "commentId",
+                        "in": "path",
+                        "description": "The comment id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Comment"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable: If the service is not available to process request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error503"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found: If the movie and/or comment is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error404"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/movies": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Get All Movies",
+                "operationId": "getAllMovies",
+                "responses": {
+                    "200": {
+                        "description": "Movies response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Movie"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable: If the service is not available to process request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error503"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/movies/{id}": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Get Movie By Id",
+                "operationId": "getMovieById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The movie id parameter in path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Movie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Movie"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service Unavailable: If the service is not available to process request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error503"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found: If the requested movie is not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error404"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Character": {
+                "required": [
+                    "id",
+                    "name",
+                    "gender",
+                    "height"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Kevin hart"
+                    },
+                    "gender": {
+                        "type": "string",
+                        "example": "male"
+                    },
+                    "height": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "176"
+                    }
+                },
+                "type": "object"
+            },
+            "Comment": {
+                "required": [
+                    "id",
+                    "content",
+                    "commenterIpAddress",
+                    "commentedAt"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "It's a hilarious movie"
+                    },
+                    "commenterIpAddress": {
+                        "type": "string",
+                        "example": "172.16.1.10"
+                    },
+                    "commentedAt": {
+                        "type": "date-time",
+                        "example": "2019-05-04 09:01:20"
+                    }
+                },
+                "type": "object"
+            },
+            "Movie": {
+                "required": [
+                    "id",
+                    "title",
+                    "openingCrawl",
+                    "numberOfComments"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "A new hope"
+                    },
+                    "openingCrawl": {
+                        "type": "string",
+                        "example": "It is a period of civil war.\\r\\nRebel spaceships..."
+                    },
+                    "numberOfComments": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "2"
+                    }
+                },
+                "type": "object"
+            },
+            "Error503": {
+                "required": [
+                    "http_code",
+                    "message"
+                ],
+                "properties": {
+                    "http_code": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": "503"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Service not available"
+                    }
+                },
+                "type": "object"
+            },
+            "Error404": {
+                "required": [
+                    "http_code",
+                    "message"
+                ],
+                "properties": {
+                    "http_code": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": "404"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "The requested resource is not available"
+                    }
+                },
+                "type": "object"
+            },
+            "Error422": {
+                "required": [
+                    "http_code",
+                    "message",
+                    "errors"
+                ],
+                "properties": {
+                    "http_code": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": "404"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Your request data is invalid"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {},
+                        "example": "The content field is required"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
