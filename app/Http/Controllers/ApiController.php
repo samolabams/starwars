@@ -18,7 +18,7 @@ use App\Domain\Entity\AbstractEntity;
      *   )
      * )
      * @OA\Server(
-     *  url="/starwars/public/api/v1"
+     *  url="/starwars/public/api/"
      * )
 */
 

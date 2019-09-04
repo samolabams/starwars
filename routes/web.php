@@ -11,7 +11,7 @@
 |
 */
 
-$router->group(['prefix' => 'api/v1'], function($router) {
+$router->group(['prefix' => 'api'], function($router) {
     $router->get('/', function () use ($router) {
         return 'Welcome to StarWars API development.';
     });
@@ -28,5 +28,5 @@ $router->group(['prefix' => 'api/v1'], function($router) {
 });
 
 $router->get('/', function () use ($router) {
-    return redirect('api/v1');
+    return redirect('api');
 });
