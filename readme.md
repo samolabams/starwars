@@ -1,21 +1,26 @@
-# Lumen PHP Framework
+# StarWars
+This is a simple lumen API for interacting with the official StarWars API, to get movies, characters and post anonymous comments. Demo URL [https://starwars-dev.herokuapp.com](https://starwars-dev.herokuapp.com)
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+# Features
+  * Get Movies
+  * Get Movies Characters
+  * Post Comments
+  
+# Installation
+  * In order to run this application you must have composer and docker installed on your computer
+  * Download or clone this application to your computer
+  * Navigate to the project directory
+  * Install all dependencies using `composer install`
+  * Rename .env.example to .env in the root directory
+  * Run the app with `docker-compose up`
+  * Open another terminal and run `docker-compose exec php-fpm bash`
+  * Migrate the database using `php artisan migrate`
+  * Open http://localhost:8081 on your browser to visit the app
+  * Enjoy
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+# Author
+  Built by Sam Olabamiji
 
-## Official Documentation
-
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# License & Copyright
+MIT (c) Sam Olabamiji.
+Licensed under the MIT License
