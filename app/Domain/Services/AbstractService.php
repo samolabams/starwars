@@ -5,6 +5,11 @@ namespace App\Domain\Services;
 
 abstract class AbstractService
 {
+    /**
+     * Extract id from url
+     * @param string $url
+     * @return int
+     */
     protected function extractIdFromUrl(string $url): int
     {
         $urlParts = explode('/', $url);

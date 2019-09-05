@@ -9,7 +9,16 @@ use App\Domain\Repository\CommentRepository;
 
 class MovieService extends AbstractService
 {
+    /**
+     *  Instance of httpClient
+     *  @var HttpClient
+     */
     private $httpClient;
+
+    /**
+     *  Instance of comment repository
+     *  @var CommentRepository
+     */
     private $commentRepository;
 
     public function __construct(HttpClient $httpClient, CommentRepository $commentRepository)
@@ -18,6 +27,12 @@ class MovieService extends AbstractService
         $this->commentRepository = $commentRepository;
     }
 
+     /**
+     * Get a movie from Stars Wars by id
+     * @param int $id
+     * @param bool $withComments
+     * @return Movie
+     */
     public function getOne($id, $withComments = true): Movie
     {
         $id = intval($id);
@@ -36,6 +51,10 @@ class MovieService extends AbstractService
         return $movie;
     }
 
+     /**
+     * Get all movies from StarWars API
+     * @return array
+     */
     public function getAll(): array
     {
         $movies = [];
@@ -58,6 +77,11 @@ class MovieService extends AbstractService
         return $movies;
     }
 
+     /**
+     * Sort movielist by release date
+     * @param array $movieList
+     * @return void
+     */
     private function sortByReleaseDate(array &$movieList): void
     {
         usort($movieList, function($movieA, $movieB) {

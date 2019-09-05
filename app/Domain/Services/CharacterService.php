@@ -10,7 +10,16 @@ use App\Domain\Services\EntitySorter;
 
 class CharacterService extends AbstractService
 {
+    /**
+     *  Instance of httpClient
+     *  @var HttpClient
+     */
     private $httpClient;
+
+    /**
+     *  Instance of movie service
+     *  @var MovieService
+     */
     private $movieService;
 
     public function __construct(HttpClient $httpClient, MovieService $movieService)
@@ -19,6 +28,12 @@ class CharacterService extends AbstractService
         $this->movieService = $movieService;
     }
 
+    /**
+     * Get Character from StarsWars API by id
+     * @param int $movieId
+     * @param int $characterId
+     * @return Character
+     */
     public function getOne($movieId, $characterId)
     {
         $movie = $this->movieService->getOne($movieId);
@@ -35,6 +50,12 @@ class CharacterService extends AbstractService
         return $character;
     }
 
+    /**
+     * Get all Characters belonging to a movie from StarsWars API
+     * @param int $movieId
+     * @param array $params
+     * @return array
+     */
     public function getAll(int $movieId, array $params = []): array
     {
         $charactersList = [];
@@ -66,6 +87,12 @@ class CharacterService extends AbstractService
         return $characters;
     }
 
+    /**
+     * Process character entities by passing them to a sorter and filter class based on the parameters
+     * @param array $characters
+     * @param array $params
+     * @return array
+     */
     private function processCharacterEntities(array $characters, array $params): array
     {
         if (array_key_exists('filter', $params)) {
@@ -79,6 +106,11 @@ class CharacterService extends AbstractService
         return $characters;
     }
 
+    /**
+     * Get total height of characters in centimeter
+     * @param array $entities
+     * @return int
+     */
     public function getTotalHeightInCentimeter(array $entities): int
     {
         return array_reduce($entities, function($sum, $entity) {
@@ -86,6 +118,11 @@ class CharacterService extends AbstractService
         }, 0);
     }
 
+    /**
+     * Convert height from centimeters to feet/in
+     * @param int $height
+     * @return string
+     */
     public function convertFromCentimeterToFeetPerInches(int $value): string
     {
         $feetValue = intval($value / 30.48);

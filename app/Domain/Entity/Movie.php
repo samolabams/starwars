@@ -32,56 +32,96 @@ class Movie extends AbstractEntity
 
     private $charactersLinks = array();
 
+    /**
+     * @param int $id
+     * @return Movie
+     */
     public function setId(int $id): Movie
     {
         $this->id = $id;
         return $this;
     }
 
+    /**
+     * Get the movie id
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
+    /**
+     * @param string $title
+     * @return Movie
+     */
     public function setTitle(string $title): Movie
     {
         $this->title = $title;
         return $this;
     }
 
+    /**
+     * Get the movie title
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $openingCrawl
+     * @return Movie
+     */
     public function setOpeningCrawl(string $openingCrawl): Movie
     {
         $this->openingCrawl = $openingCrawl;
         return $this;
     }
 
+    /**
+     * Get the movie opening crawl
+     * @return string
+     */
     public function getOpeningCrawl(): string
     {
         return $this->openingCrawl;
     }
 
+    /**
+     * @param int $numberOfComments
+     * @return Movie
+     */
     public function setNumberOfComments(int $numberOfComments): Movie
     {
         $this->numberOfComments = $numberOfComments;
         return $this;
     }
 
+    /**
+     * Get number of comments
+     * @return int
+     */
     public function getNumberOfComments(): int
     {
         return $this->numberOfComments;
     }
 
+    /**
+     * @param array $characterLinks
+     * @return Movie
+     */
     public function setCharactersLinks(array $charactersLinks): Movie
     {
         $this->charactersLinks = $charactersLinks;
         return $this;
     }
 
+    /**
+     * Get the movie character links
+     * @return array
+     */
     public function getCharactersLinks(): array
     {
         return $this->charactersLinks;

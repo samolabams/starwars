@@ -9,8 +9,22 @@ use App\Domain\Factory\CommentFactory;
 
 class CommentService extends AbstractService
 {
+    /**
+     *  Instance of movie service
+     *  @var MovieService
+     */
     private $movieService;
+
+    /**
+     *  Instance of comment factory
+     *  @var CommentFactory
+     */
     private $commentFactory;
+
+    /**
+     *  Instance of comment repository
+     *  @var CommentRepository
+     */
     private $commentRepository;
 
     public function __construct(MovieService $movieService, CommentFactory $commentFactory, CommentRepositoryInterface $commentRepository)
@@ -20,6 +34,12 @@ class CommentService extends AbstractService
         $this->commentFactory = $commentFactory;
     }
 
+    /**
+     * Create new movie comment
+     * @param int $movieId
+     * @param array $data
+     * @return int
+     */
     public function create(int $movieId, array $data): int
     {
         $data['movie'] = $this->movieService->getOne($movieId, false);
@@ -30,6 +50,12 @@ class CommentService extends AbstractService
         return $commentId;
     }
 
+    /**
+     * Get Comment from from the database by id
+     * @param int $movieId
+     * @param int $commentId
+     * @return Comment
+     */
     public function getOne(int $movieId, int $commentId): Comment
     {
         $movie = $this->movieService->getOne($movieId, false);
@@ -50,6 +76,13 @@ class CommentService extends AbstractService
         return $comment;
     }
 
+    /**
+     * Get Comments from from the database by id
+     * @param int $id
+     * @param int $offset
+     * @param int $limit
+     * @return array
+     */
     public function getAllByMovieId(int $id, int $offset, int $limit): array
     {
         $comments = [];
