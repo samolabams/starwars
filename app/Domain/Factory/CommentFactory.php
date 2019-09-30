@@ -11,7 +11,7 @@ class CommentFactory
      * @param array $data
      * @return Comment
      */
-    public function createFromData(array $data): Comment
+    public static function createFromData(array $data): Comment
     {
         $comment = new Comment([
             'movie' => $data['movie'],

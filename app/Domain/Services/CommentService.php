@@ -16,22 +16,15 @@ class CommentService extends AbstractService
     private $movieService;
 
     /**
-     *  Instance of comment factory
-     *  @var CommentFactory
-     */
-    private $commentFactory;
-
-    /**
      *  Instance of comment repository
      *  @var CommentRepository
      */
     private $commentRepository;
 
-    public function __construct(MovieService $movieService, CommentFactory $commentFactory, CommentRepositoryInterface $commentRepository)
+    public function __construct(MovieService $movieService, CommentRepositoryInterface $commentRepository)
     {
         $this->movieService = $movieService;
         $this->commentRepository = $commentRepository;
-        $this->commentFactory = $commentFactory;
     }
 
     /**
@@ -44,7 +37,7 @@ class CommentService extends AbstractService
     {
         $data['movie'] = $this->movieService->getOne($movieId, false);
 
-        $comment = $this->commentFactory->createFromData($data);
+        $comment = CommentFactory::createFromData($data);
         $commentId = $this->commentRepository->persist($comment);
 
         return $commentId;
