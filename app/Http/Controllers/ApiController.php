@@ -6,7 +6,6 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 use League\Fractal\TransformerAbstract;
-use App\Domain\Entity\AbstractEntity;
 
 /**
      * @OA\Info(
@@ -122,7 +121,7 @@ class ApiController extends Controller
         return response()->json($error, $this->statusCode);
     }
 
-    protected function respondWithItem(AbstractEntity $data, TransformerAbstract $transformer, array $meta = [], array $headers = [])
+    protected function respondWithItem($data, TransformerAbstract $transformer, array $meta = [], array $headers = [])
     {
         $resource = new Item($data, $transformer);
         if (!empty($meta)) {

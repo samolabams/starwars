@@ -65,13 +65,13 @@ class CommentService extends AbstractService
             abort(404);
         }
 
-        $comment = new Comment;
-
-        $comment->setMovie($movie);
-        $comment->setId(intval($commentResult->id));
-        $comment->setContent($commentResult->content);
-        $comment->setCommenterIpAddress($commentResult->commenter_ip_address);
-        $comment->setCommentedAt(new \DateTime($commentResult->commented_at));
+        $comment = new Comment([
+            'movie' => $movie,
+            'id' => intval($commentResult->id),
+            'content' => $commentResult->content,
+            'commenterIpAddress' => $commentResult->commenter_ip_address,
+            'commentedAt' => new \DateTime($commentResult->commented_at),
+        ]);
 
         return $comment;
     }
@@ -90,13 +90,13 @@ class CommentService extends AbstractService
         $commentsResult = $this->commentRepository->getAllByMovieId($id, $offset, $limit);
 
         foreach ($commentsResult as $result) {
-            $comment = new Comment;
-
-            $comment->setMovie($movie);
-            $comment->setId(intval($result->id));
-            $comment->setContent($result->content);
-            $comment->setCommenterIpAddress($result->commenter_ip_address);
-            $comment->setCommentedAt(new \DateTime($result->commented_at));
+            $comment = new Comment([
+                'movie' => $movie,
+                'id' => intval($result->id),
+                'content' => $result->content,
+                'commenterIpAddress' => $result->commenter_ip_address,
+                'commentedAt' => new \DateTime($result->commented_at),
+            ]);
 
             array_push($comments, $comment);
         }

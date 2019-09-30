@@ -40,12 +40,13 @@ class CharacterService extends AbstractService
         $characterResponse = $this->httpClient->get('people/'.$characterId);
         $characterResponseAsJson = json_decode($characterResponse->getBodyAsString());
 
-        $character = new Character;
-        $character->setMovie($movie);
-        $character->setId(intval($characterId));
-        $character->setName($characterResponseAsJson->name);
-        $character->setHeight(intval($characterResponseAsJson->height));
-        $character->setGender($characterResponseAsJson->gender);
+        $character = new Character([
+            'movie' => $movie,
+            'id' => $characterId,
+            'name' => $characterResponseAsJson->name,
+            'height' => $characterResponseAsJson->height,
+            'gender' => $characterResponseAsJson->gender,
+        ]);
 
         return $character;
     }
@@ -72,12 +73,13 @@ class CharacterService extends AbstractService
         foreach ($charactersList as $list) {
             $characterId = $this->extractIdFromUrl($list->url);
 
-            $character = new Character;
-            $character->setMovie($movie);
-            $character->setId($characterId);
-            $character->setName($list->name);
-            $character->setHeight(intval($list->height));
-            $character->setGender($list->gender);
+            $character = new Character([
+                'movie' => $movie,
+                'id' => $characterId,
+                'name' => $list->name,
+                'height' => $list->height,
+                'gender' => $list->gender,
+            ]);
 
             array_push($characters, $character);
         }
