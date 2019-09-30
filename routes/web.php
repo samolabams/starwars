@@ -12,9 +12,7 @@
 */
 
 $router->group(['prefix' => 'api'], function($router) {
-    $router->get('/', function () use ($router) {
-        return 'Welcome to StarWars API Service. Navigate to ' . '<a href="'.url('api/documentation').'">' . url('api/documentation') . '</a>' . ' to check the docs.';
-    });
+    $router->get('/', ['uses' => 'WelcomeController@index']);
 
     $router->get('/movies', ['uses' => 'MovieController@index']);
     $router->get('/movies/{id}', ['uses' => 'MovieController@show']);
