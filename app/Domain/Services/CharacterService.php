@@ -71,7 +71,7 @@ class CharacterService extends AbstractService
         }
 
         foreach ($charactersList as $list) {
-            $characterId = $this->extractIdFromUrl($list->url);
+            $characterId = extractIdFromUrl($list->url);
 
             $character = new Character([
                 'movie' => $movie,

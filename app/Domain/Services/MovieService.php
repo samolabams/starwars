@@ -67,7 +67,7 @@ class MovieService extends AbstractService
         $this->sortByReleaseDate($movieList);
 
         foreach ($movieList as $list) {
-            $movieId = $this->extractIdFromUrl($list->url);
+            $movieId = extractIdFromUrl($list->url);
 
             $movie = new Movie([
                 'id' => $movieId,
