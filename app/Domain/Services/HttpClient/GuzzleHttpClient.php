@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\HttpClient;
+namespace App\Domain\Services\HttpClient;
 
 use Exception;
 use GuzzleHttp\Psr7;

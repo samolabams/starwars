@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Paginator;
+namespace App\Domain\Services\Paginator;
 
 class Paginator
 {

@@ -15,8 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\Services\HttpClient\HttpClient',
-            'App\Services\HttpClient\GuzzleHttpClient'
+            'App\Domain\Services\HttpClient\HttpClient',
+            'App\Domain\Services\HttpClient\GuzzleHttpClient'
         );
 
         $this->app->bind(

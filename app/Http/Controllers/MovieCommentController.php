@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Domain\Services\CommentService;
 use App\Domain\Repository\CommentRepository;
 use App\Http\Transformers\CommentTransformer;
-use App\Services\Paginator\Paginator;
+use App\Domain\Services\Paginator\Paginator;
 use Validator;
 
 class MovieCommentController extends ApiController

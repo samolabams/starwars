@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Services;
 
-use App\Services\HttpClient\HttpClient;
+use App\Domain\Services\HttpClient\HttpClient;
 use App\Domain\Entity\Character;
 use App\Domain\Services\EntityFilter;
 use App\Domain\Services\EntitySorter;
