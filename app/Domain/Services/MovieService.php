@@ -43,6 +43,7 @@ class MovieService extends AbstractService
             'id' => $id,
             'title' => $movieResponseAsJson->title,
             'openingCrawl' => $movieResponseAsJson->opening_crawl,
+            'releaseDate' => $movieResponseAsJson->release_date,
             'charactersLinks' => $movieResponseAsJson->characters,
         ];
 
@@ -73,6 +74,7 @@ class MovieService extends AbstractService
                 'id' => $movieId,
                 'title' => $list->title,
                 'openingCrawl' => $list->opening_crawl,
+                'releaseDate' => $list->release_date,
                 'numberOfComments' => $this->commentRepository->getCountByMovieId($movieId),
             ]);
 

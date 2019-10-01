@@ -534,6 +534,10 @@
                         "type": "string",
                         "example": "It is a period of civil war.\\r\\nRebel spaceships..."
                     },
+                    "releaseDate": {
+                        "type": "string",
+                        "example": "1977-05-25"
+                    },
                     "numberOfComments": {
                         "type": "integer",
                         "format": "int64",

@@ -33,6 +33,12 @@ class Movie
     private $openingCrawl;
 
     /**
+     * @OA\Property(type="string", example="1977-05-25")
+     * @var string
+     */
+    private $releaseDate;
+
+    /**
      * @OA\Property(type="integer", format="int64", example="2")
      */
     private $numberOfComments;

@@ -13,6 +13,7 @@ class MovieTransformer extends TransformerAbstract
             'id' => (int) $movie->id,
             'title' => $movie->title,
             'opening_crawl' => $movie->openingCrawl,
+            'release_date' => $movie->releaseDate,
             'count_of_comments' => $movie->numberOfComments,
 
             'links' => [
