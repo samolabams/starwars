@@ -23,18 +23,18 @@ use League\Fractal\TransformerAbstract;
 
 /**
  * @OA\Schema(
- *     schema="Error503",
+ *     schema="Error500",
  *     required={"http_code", "message"},
  *     @OA\Property(
  *         property="http_code",
  *         type="integer",
  *         format="int32",
- *         example="503"
+ *         example="500"
  *     ),
  *     @OA\Property(
  *         property="message",
  *         type="string",
- *         example="Service not available"
+ *         example="Internal Server Error"
  *     )
  * )
  */

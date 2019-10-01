@@ -64,12 +64,12 @@
                             }
                         }
                     },
-                    "503": {
-                        "description": "Service Unavailable: If the service is not available to process request",
+                    "500": {
+                        "description": "Internal Server Error: If the service is not available to process request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Error503"
+                                    "$ref": "#/components/schemas/Error500"
                                 }
                             }
                         }
@@ -127,12 +127,12 @@
                             }
                         }
                     },
-                    "503": {
-                        "description": "Service Unavailable: If the service is not available to process request",
+                    "500": {
+                        "description": "Internal Server Error: If the service is not available to process request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Error503"
+                                    "$ref": "#/components/schemas/Error500"
                                 }
                             }
                         }
@@ -198,12 +198,12 @@
                             }
                         }
                     },
-                    "503": {
-                        "description": "Service Unavailable: If the service is not available to process request",
+                    "500": {
+                        "description": "Internal Server Error: If the service is not available to process request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Error503"
+                                    "$ref": "#/components/schemas/Error500"
                                 }
                             }
                         }
@@ -279,12 +279,12 @@
                             }
                         }
                     },
-                    "503": {
-                        "description": "Service Unavailable: If the service is not available to process request",
+                    "500": {
+                        "description": "Internal Server Error: If the service is not available to process request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Error503"
+                                    "$ref": "#/components/schemas/Error500"
                                 }
                             }
                         }
@@ -342,12 +342,12 @@
                             }
                         }
                     },
-                    "503": {
-                        "description": "Service Unavailable: If the service is not available to process request",
+                    "500": {
+                        "description": "Internal Server Error: If the service is not available to process request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Error503"
+                                    "$ref": "#/components/schemas/Error500"
                                 }
                             }
                         }
@@ -386,12 +386,12 @@
                             }
                         }
                     },
-                    "503": {
-                        "description": "Service Unavailable: If the service is not available to process request",
+                    "500": {
+                        "description": "Internal Server Error: If the service is not available to process request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Error503"
+                                    "$ref": "#/components/schemas/Error500"
                                 }
                             }
                         }
@@ -430,12 +430,12 @@
                             }
                         }
                     },
-                    "503": {
-                        "description": "Service Unavailable: If the service is not available to process request",
+                    "500": {
+                        "description": "Internal Server Error: If the service is not available to process request",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Error503"
+                                    "$ref": "#/components/schemas/Error500"
                                 }
                             }
                         }
@@ -542,7 +542,7 @@
                 },
                 "type": "object"
             },
-            "Error503": {
+            "Error500": {
                 "required": [
                     "http_code",
                     "message"
@@ -551,11 +551,11 @@
                     "http_code": {
                         "type": "integer",
                         "format": "int32",
-                        "example": "503"
+                        "example": "500"
                     },
                     "message": {
                         "type": "string",
-                        "example": "Service not available"
+                        "example": "Internal Server Error"
                     }
                 },
                 "type": "object"

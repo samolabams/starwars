@@ -64,10 +64,10 @@ class Handler extends ExceptionHandler
         } else {
             return response()->json([
                 'error' => [
-                    'http_code' => 503,
-                    'message' => 'Service not available',
+                    'http_code' => 500,
+                    'message' => 'There is an Internal Server Error',
                 ]
-            ], 503);
+            ], 500);
         }
 
         return parent::render($request, $exception);

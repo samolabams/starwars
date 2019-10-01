@@ -23,9 +23,9 @@ class MovieController extends ApiController
      *          )
      *      ),
      *      @OA\Response(
-     *          response=503,
-     *          description="Service Unavailable: If the service is not available to process request",
-     *          @OA\JsonContent(ref="#/components/schemas/Error503")
+     *          response=500,
+     *          description="Internal Server Error: If the service is not available to process request",
+     *          @OA\JsonContent(ref="#/components/schemas/Error500")
      *      )
      *   )
      */
@@ -57,9 +57,9 @@ class MovieController extends ApiController
      *          )
      *      ),
      *      @OA\Response(
-     *          response=503,
-     *          description="Service Unavailable: If the service is not available to process request",
-     *          @OA\JsonContent(ref="#/components/schemas/Error503")
+     *          response=500,
+     *          description="Internal Server Error: If the service is not available to process request",
+     *          @OA\JsonContent(ref="#/components/schemas/Error500")
      *      ),
      *      @OA\Response(
      *          response=404,
