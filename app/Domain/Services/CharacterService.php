@@ -22,6 +22,8 @@ class CharacterService extends AbstractService
      */
     private $movieService;
 
+    private $allowedSortFields = ['name', 'height', 'gender'];
+
     public function __construct(HttpClient $httpClient, MovieService $movieService)
     {
         $this->httpClient = $httpClient;
@@ -101,8 +103,12 @@ class CharacterService extends AbstractService
             $characters = (new EntityFilter)->filter($characters, 'gender', $params['filter']);
         }
 
-        if (array_key_exists('sort', $params)) {
-            $characters = (new EntitySorter)->sort($characters, $params['sort']);
+        if (array_key_exists('sort_by', $params)) {
+            $propertyParts = explode('.', $params['sort_by']);
+            
+            if (count($propertyParts) === 2 && in_array($propertyParts[0], $this->allowedSortFields)) {
+                $characters = (new EntitySorter)->sort($characters, $propertyParts[0], $propertyParts[1]);
+            }
         }
 
         return $characters;

@@ -11,14 +11,12 @@ class EntitySorter
      * @param string $property
      * @return array
      */
-    public function sort(array $entities, $property): array
+    public function sort(array $entities, string $property, string $order): array
     {
-        $property = strtolower($property);
-
-        if (starts_with($property, '-')) {
-            $this->sortDescending($entities, $this->removeSortSignFromProperty($property));
-        } else {
-            $this->sortAscending($entities, $this->removeSortSignFromProperty($property));
+        if ($order === 'asc') {
+            $this->sortAscending($entities, $property);
+        } else if ($order === 'desc') {
+            $this->sortDescending($entities, $property);
         }
 
         return $entities;
@@ -30,7 +28,7 @@ class EntitySorter
      * @param string $property
      * @return array
      */
-    private function sortAscending(array &$entities, $property): void
+    private function sortAscending(array &$entities, string $property): void
     {
         usort($entities, function($entityA, $entityB) use ($property) {
             return $entityA->{$property} <=> $entityB->{$property};
@@ -43,20 +41,11 @@ class EntitySorter
      * @param string $property
      * @return array
      */
-    private function sortDescending(array &$entities, $property): void
+    private function sortDescending(array &$entities, string $property): void
     {
         usort($entities, function($entityA, $entityB) use ($property) {
             return $entityB->{$property} <=> $entityA->{$property};
         });
     }
 
-    /**
-     * Remove sort sign from property
-     * @param string $property
-     * @return string
-     */
-    private function removeSortSignFromProperty(string $property): string
-    {
-        return trim(str_replace(['-', '+'], ['',''], $property));
-    }
 }

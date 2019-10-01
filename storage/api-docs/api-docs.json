@@ -41,13 +41,13 @@
                         "example": "female"
                     },
                     {
-                        "name": "sort",
+                        "name": "sort_by",
                         "in": "query",
-                        "description": "The sort query: to sort by name, gender or height (add -sort to sort in descending order. Example: -name)",
+                        "description": "The sort_by query: to sort by one of name, gender or height (add sort.asc to sort in ascending order, sort.desc to sort in descending order. Example: name.asc, name.desc, gender.asc, height.desc)",
                         "schema": {
                             "type": "string"
                         },
-                        "example": "-height"
+                        "example": "height.desc"
                     }
                 ],
                 "responses": {
