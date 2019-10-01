@@ -485,34 +485,6 @@
                 },
                 "type": "object"
             },
-            "Comment": {
-                "required": [
-                    "id",
-                    "content",
-                    "commenterIpAddress",
-                    "commentedAt"
-                ],
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": "1"
-                    },
-                    "content": {
-                        "type": "string",
-                        "example": "It's a hilarious movie"
-                    },
-                    "commenterIpAddress": {
-                        "type": "string",
-                        "example": "172.16.1.10"
-                    },
-                    "commentedAt": {
-                        "type": "date-time",
-                        "example": "2019-05-04 09:01:20"
-                    }
-                },
-                "type": "object"
-            },
             "Movie": {
                 "required": [
                     "id",
@@ -602,6 +574,34 @@
                         "type": "array",
                         "items": {},
                         "example": "The content field is required"
+                    }
+                },
+                "type": "object"
+            },
+            "Comment": {
+                "required": [
+                    "id",
+                    "content",
+                    "commenterIpAddress",
+                    "commentedAt"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": "1"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "It's a hilarious movie"
+                    },
+                    "commenterIpAddress": {
+                        "type": "string",
+                        "example": "172.16.1.10"
+                    },
+                    "commentedAt": {
+                        "type": "date-time",
+                        "example": "2019-05-04 09:01:20"
                     }
                 },
                 "type": "object"

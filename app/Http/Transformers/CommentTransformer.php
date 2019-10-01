@@ -3,7 +3,7 @@
 namespace App\Http\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use App\Domain\Entity\Comment;
+use App\Models\Comment;
 
 class CommentTransformer extends TransformerAbstract
 {
@@ -12,13 +12,13 @@ class CommentTransformer extends TransformerAbstract
         return [
             'id' => (int) $comment->id,
             'content' => $comment->content,
-            'commenter_ip_address' => $comment->commenterIpAddress,
-            'commented_at' => $comment->commentedAt->format('Y-m-d H:i:s'),
+            'commenter_ip_address' => $comment->commenter_ip_address,
+            'commented_at' => $comment->commented_at->format('Y-m-d H:i:s'),
 
             'links' => [
                 [
                     'rel' => 'self',
-                    'uri' => '/movies/'.$comment->movie->id.'/comments/'.$comment->id
+                    'uri' => '/movies/'.$comment->movie_id.'/comments/'.$comment->id
                 ]
             ]
         ];

@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Services;
 
-use App\Domain\Entity\Comment;
-use App\Domain\Repository\CommentRepositoryInterface;
-use App\Domain\Factory\CommentFactory;
+use App\Models\Comment;
+use App\Domain\Repository\CommentRepository;
 
 class CommentService extends AbstractService
 {
@@ -21,7 +20,7 @@ class CommentService extends AbstractService
      */
     private $commentRepository;
 
-    public function __construct(MovieService $movieService, CommentRepositoryInterface $commentRepository)
+    public function __construct(MovieService $movieService, CommentRepository $commentRepository)
     {
         $this->movieService = $movieService;
         $this->commentRepository = $commentRepository;
@@ -33,14 +32,15 @@ class CommentService extends AbstractService
      * @param array $data
      * @return int
      */
-    public function create(int $movieId, array $data): int
+    public function create(int $movieId, array $data): Comment
     {
         $data['movie'] = $this->movieService->getOne($movieId, false);
+        $data['ip_address'] = $_SERVER['REMOTE_ADDR'];
+        $data['commented_at'] = new \DateTime();
 
-        $comment = CommentFactory::createFromData($data);
-        $commentId = $this->commentRepository->persist($comment);
+        $comment = $this->commentRepository->persist($data);
 
-        return $commentId;
+        return $comment;
     }
 
     /**
@@ -52,19 +52,7 @@ class CommentService extends AbstractService
     public function getOne(int $movieId, int $commentId): Comment
     {
         $movie = $this->movieService->getOne($movieId, false);
-        $commentResult = $this->commentRepository->getById($commentId);
-
-        if (is_null($commentResult)) {
-            abort(404);
-        }
-
-        $comment = new Comment([
-            'movie' => $movie,
-            'id' => intval($commentResult->id),
-            'content' => $commentResult->content,
-            'commenterIpAddress' => $commentResult->commenter_ip_address,
-            'commentedAt' => new \DateTime($commentResult->commented_at),
-        ]);
+        $comment = $this->commentRepository->getById($movieId, $commentId);
 
         return $comment;
     }
@@ -72,27 +60,13 @@ class CommentService extends AbstractService
     /**
      * Get Comments from from the database by id
      * @param int $id
-     * @param int $offset
-     * @param int $limit
+     * @param int $recordsPerPage
      * @return array
      */
-    public function getAllByMovieId(int $id, int $offset, int $limit): array
+    public function getAllByMovieId(int $id, int $recordsPerPage)
     {
-        $comments = [];
         $movie = $this->movieService->getOne($id, false);
-        $commentsResult = $this->commentRepository->getAllByMovieId($id, $offset, $limit);
-
-        foreach ($commentsResult as $result) {
-            $comment = new Comment([
-                'movie' => $movie,
-                'id' => intval($result->id),
-                'content' => $result->content,
-                'commenterIpAddress' => $result->commenter_ip_address,
-                'commentedAt' => new \DateTime($result->commented_at),
-            ]);
-
-            array_push($comments, $comment);
-        }
+        $comments = $this->commentRepository->getAllByMovieId($id, $recordsPerPage);
 
         return $comments;
     }

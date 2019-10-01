@@ -18,11 +18,6 @@ class AppServiceProvider extends ServiceProvider
             'App\Domain\Services\HttpClient\HttpClient',
             'App\Domain\Services\HttpClient\GuzzleHttpClient'
         );
-
-        $this->app->bind(
-            'App\Domain\Repository\CommentRepositoryInterface',
-            'App\Domain\Repository\CommentRepository'
-        );
     }
 
     public function boot(UrlGenerator $url)

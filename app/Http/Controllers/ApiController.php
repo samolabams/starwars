@@ -6,6 +6,7 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Manager;
 use League\Fractal\TransformerAbstract;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 /**
      * @OA\Info(
@@ -121,7 +122,7 @@ class ApiController extends Controller
         return response()->json($error, $this->statusCode);
     }
 
-    protected function respondWithItem($data, TransformerAbstract $transformer, array $meta = [], array $headers = [])
+    protected function respondWithItem($data, TransformerAbstract $transformer, array $headers = [], array $meta = [])
     {
         $resource = new Item($data, $transformer);
         if (!empty($meta)) {
@@ -131,12 +132,18 @@ class ApiController extends Controller
         return response()->json($this->fractal->createData($resource)->toArray(), $this->statusCode, $headers);
     }
 
-    protected function respondWithCollection(array $data, TransformerAbstract $transformer, array $meta = [], array $headers = [])
+    protected function respondWithCollection($data, TransformerAbstract $transformer, $withPagination = false, array $headers = [], array $meta = [])
     {
-        $resource = new Collection($data, $transformer);
+        $collection = $withPagination ? $data->getCollection() : $data;
+
+        $resource = new Collection($collection, $transformer);
+        if ($withPagination) {
+            $resource->setPaginator(new IlluminatePaginatorAdapter($data));
+        }
         if (!empty($meta)) {
             $resource->setMeta($meta);
         }
+
 
         return response()->json($this->fractal->createData($resource)->toArray(), $this->statusCode, $headers);
     }

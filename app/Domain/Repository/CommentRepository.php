@@ -3,38 +3,37 @@ declare(strict_types=1);
 
 namespace App\Domain\Repository;
 
-use Illuminate\Support\Facades\DB;
-use App\Domain\Repository\CommentRepositoryInterface;
-use App\Domain\Entity\Comment;
+use App\Models\Comment;
 
-class CommentRepository implements CommentRepositoryInterface
+class CommentRepository
 {
-    public function persist($comment): int
+    public function persist(array $data): Comment
     {
-        $response = DB::insert('INSERT INTO comments(movie_id, content, commenter_ip_address, commented_at) VALUES (?, ?, ?, ?)', [$comment->movie->id, $comment->content, $comment->commenterIpAddress, $comment->commentedAt]);
-        $id = (int) DB::getPdo()->lastInsertId();
-
-        return $id;
+        return Comment::create([
+            'movie_id' => $data['movie']->id,
+            'content' => $data['content'],
+            'commenter_ip_address' => $data['ip_address'],
+            'commented_at' => $data['commented_at']
+        ]);
     }
 
     public function getCountByMovieId(int $movieId): int
     {
-        $number_of_comments = DB::select('SELECT COUNT(id) AS num_comments FROM comments WHERE movie_id = ?', [$movieId]);
-
-        return $number_of_comments[0]->num_comments;
+        return Comment::where('movie_id', $movieId)
+                        ->count();
     }
 
-    public function getById(int $id): ?\stdClass
+    public function getById(int $movieId, int $commentId): Comment
     {
-        $comment = DB::select('SELECT * FROM comments WHERE id = ?', [$id]);
-
-        return !empty($comment) ? $comment[0] : null;
+        return Comment::where('movie_id', $movieId)
+                        ->where('id', $commentId)
+                        ->firstOrFail();
     }
 
-    public function getAllByMovieId(int $movieId, int $offset, int $limit): array
+    public function getAllByMovieId(int $movieId, int $recordsPerPage = 20)
     {
-        $comments = DB::select('SELECT * FROM comments WHERE movie_id = ? ORDER BY content DESC LIMIT ? OFFSET ?', [$movieId, $limit, $offset]);
-
-        return $comments;
+        return Comment::where('movie_id', $movieId)
+                        ->orderBy('commented_at', 'DESC')
+                        ->paginate($recordsPerPage);
     }
 }

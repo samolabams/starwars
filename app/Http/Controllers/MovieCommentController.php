@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Domain\Services\CommentService;
-use App\Domain\Repository\CommentRepository;
 use App\Http\Transformers\CommentTransformer;
-use App\Domain\Services\Paginator\Paginator;
 use Validator;
 
 class MovieCommentController extends ApiController
@@ -56,30 +54,14 @@ class MovieCommentController extends ApiController
      *      )
      *    )
      */
-    public function index(Request $request, CommentService $commentService, CommentRepository $commentRepository, $id)
+    public function index(Request $request, CommentService $commentService, $id)
     {
-        $metadata = [];
-        $recordsPerPage = (int) $request->limit ?: 10;
-        $currentPage = (int) $request->page ?: 1;
-        $totalRecords = $commentRepository->getCountByMovieId($id);
+        $paginate = true;
+        $recordsPerPage = (int) $request->limit ?: 20;
 
-        $paginator = (new Paginator)->setRecordsPerPage($recordsPerPage)
-                  ->setTotalRecords($totalRecords)
-                  ->setCurrentPage($currentPage);
+        $comments = $commentService->getAllByMovieId($id, $recordsPerPage);
 
-        $totalPages = $paginator->getTotalPages();
-        $offset = $paginator->getOffset();
-
-        $comments = $commentService->getAllByMovieId($id, $offset, $recordsPerPage);
-
-        $metadata['page'] = [
-            'current' => $currentPage,
-            'per_page' => $recordsPerPage,
-            'total' => $totalRecords,
-            'last' => $totalPages
-        ];
-
-        return $this->respondWithCollection($comments, new CommentTransformer, $metadata);
+        return $this->respondWithCollection($comments, new CommentTransformer, $paginate);
     }
 
     /**
@@ -137,11 +119,10 @@ class MovieCommentController extends ApiController
         }
 
         $data = $request->only('content');
-        $data['ip_address'] = $_SERVER['REMOTE_ADDR'];
 
-        $commentId = $commentService->create($id, $data);
+        $comment = $commentService->create($id, $data);
 
-        return $this->setStatusCode(201)->respondWithString('', ['Location' => url('/movies/'.$id.'/comments/'.$commentId)]);
+        return $this->setStatusCode(201)->respondWithItem($comment, new CommentTransformer, ['Location' => url('/movies/'.$id.'/comments/'.$comment->id)]);
     }
 
     /**
@@ -185,8 +166,8 @@ class MovieCommentController extends ApiController
      */
     public function show(CommentService $commentService, $id, $commentId)
     {
-        $comments = $commentService->getOne($id, $commentId);
+        $comment = $commentService->getOne($id, $commentId);
 
-        return $this->respondWithItem($comments, new CommentTransformer);
+        return $this->respondWithItem($comment, new CommentTransformer);
     }
 }
