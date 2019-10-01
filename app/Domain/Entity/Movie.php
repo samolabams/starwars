@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Domain\Entity;
 
 /**
- * @OA\Schema(schema="Movie", required={"id", "title", "openingCrawl", "numberOfComments"})
+ * @OA\Schema(schema="Movie", required={"id", "title", "opening_crawl", "release_date", "number_of_comments"})
  */
 class Movie
 {
@@ -30,18 +30,18 @@ class Movie
      * @OA\Property(type="string", example="It is a period of civil war.\r\nRebel spaceships...")
      * @var string
      */
-    private $openingCrawl;
+    private $opening_crawl;
 
     /**
      * @OA\Property(type="string", example="1977-05-25")
      * @var string
      */
-    private $releaseDate;
+    private $release_date;
 
     /**
      * @OA\Property(type="integer", format="int64", example="2")
      */
-    private $numberOfComments;
+    private $number_of_comments;
 
-    private $charactersLinks = array();
+    private $characters_links = array();
 }

@@ -62,7 +62,7 @@ class CharacterService extends AbstractService
         $charactersList = [];
         $characters = [];
         $movie = $this->movieService->getOne($movieId);
-        $results = $this->httpClient->getAsync($movie->charactersLinks);
+        $results = $this->httpClient->getAsync($movie->characters_links);
 
         foreach($results->getBodyAsArray() as $result) {
             $charactersList[] = json_decode(

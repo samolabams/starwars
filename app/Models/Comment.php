@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @OA\Schema(schema="Comment", required={"id", "content", "commenterIpAddress", "commentedAt"})
+ * @OA\Schema(schema="Comment", required={"id", "content", "commenter_ip_address", "commented_at"})
  */
 class Comment extends Model
 {
@@ -18,11 +18,11 @@ class Comment extends Model
     */
 
     /**
-     * @OA\Property(property="commenterIpAddress", type="string", example="172.16.1.10")
+     * @OA\Property(property="commenter_ip_address", type="string", example="172.16.1.10")
     */
 
     /**
-     * @OA\Property(property="commentedAt", type="date-time", example="2019-05-04 09:01:20")
+     * @OA\Property(property="commented_at", type="date-time", example="2019-05-04 09:01:20")
     */
 
     /**

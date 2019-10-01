@@ -73,7 +73,7 @@ class MovieCharacterController extends ApiController
         $metadata['total_height_in_cm'] = $totalHeightInCm = $characterService->getTotalHeightInCentimeter($characters);
         $metadata['total_height_in_ft_inches'] = $characterService->convertFromCentimeterToFeetPerInches($totalHeightInCm);
 
-        return $this->respondWithCollection($characters, new CharacterTransformer, $metadata);
+        return $this->respondWithCollection($characters, new CharacterTransformer, false, [], $metadata);
     }
 
     /**

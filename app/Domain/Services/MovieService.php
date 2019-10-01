@@ -42,13 +42,13 @@ class MovieService extends AbstractService
         $movieData = [
             'id' => $id,
             'title' => $movieResponseAsJson->title,
-            'openingCrawl' => $movieResponseAsJson->opening_crawl,
-            'releaseDate' => $movieResponseAsJson->release_date,
-            'charactersLinks' => $movieResponseAsJson->characters,
+            'opening_crawl' => $movieResponseAsJson->opening_crawl,
+            'release_date' => $movieResponseAsJson->release_date,
+            'characters_links' => $movieResponseAsJson->characters,
         ];
 
         if ($withComments) {
-            $movieData['numberOfComments'] = $this->commentRepository->getCountByMovieId($id);
+            $movieData['number_of_comments'] = $this->commentRepository->getCountByMovieId($id);
         }
 
         $movie = new Movie($movieData);
@@ -73,9 +73,9 @@ class MovieService extends AbstractService
             $movie = new Movie([
                 'id' => $movieId,
                 'title' => $list->title,
-                'openingCrawl' => $list->opening_crawl,
-                'releaseDate' => $list->release_date,
-                'numberOfComments' => $this->commentRepository->getCountByMovieId($movieId),
+                'opening_crawl' => $list->opening_crawl,
+                'release_date' => $list->release_date,
+                'number_of_comments' => $this->commentRepository->getCountByMovieId($movieId),
             ]);
 
             array_push($movies, $movie);

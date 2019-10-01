@@ -489,8 +489,9 @@
                 "required": [
                     "id",
                     "title",
-                    "openingCrawl",
-                    "numberOfComments"
+                    "opening_crawl",
+                    "release_date",
+                    "number_of_comments"
                 ],
                 "properties": {
                     "id": {
@@ -502,15 +503,15 @@
                         "type": "string",
                         "example": "A new hope"
                     },
-                    "openingCrawl": {
+                    "opening_crawl": {
                         "type": "string",
                         "example": "It is a period of civil war.\\r\\nRebel spaceships..."
                     },
-                    "releaseDate": {
+                    "release_date": {
                         "type": "string",
                         "example": "1977-05-25"
                     },
-                    "numberOfComments": {
+                    "number_of_comments": {
                         "type": "integer",
                         "format": "int64",
                         "example": "2"
@@ -582,8 +583,8 @@
                 "required": [
                     "id",
                     "content",
-                    "commenterIpAddress",
-                    "commentedAt"
+                    "commenter_ip_address",
+                    "commented_at"
                 ],
                 "properties": {
                     "id": {
@@ -595,11 +596,11 @@
                         "type": "string",
                         "example": "It's a hilarious movie"
                     },
-                    "commenterIpAddress": {
+                    "commenter_ip_address": {
                         "type": "string",
                         "example": "172.16.1.10"
                     },
-                    "commentedAt": {
+                    "commented_at": {
                         "type": "date-time",
                         "example": "2019-05-04 09:01:20"
                     }
