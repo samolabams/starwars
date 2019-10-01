@@ -58,7 +58,7 @@ $app->singleton(
 */
 
 $app->routeMiddleware([
-    'api' => App\Http\Middleware\ApiMiddleware::class,
+    'request-validator' => App\Http\Middleware\RequestValidatorMiddleware::class,
 ]);
 
 $app->middleware([

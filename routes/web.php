@@ -11,14 +11,14 @@
 |
 */
 
-$router->group(['prefix' => 'api'], function($router) {
+$router->group(['prefix' => 'api', 'middleware' => 'request-validator'], function($router) {
     $router->get('/', ['uses' => 'WelcomeController@index']);
 
     $router->get('/movies', ['uses' => 'MovieController@index']);
     $router->get('/movies/{id}', ['uses' => 'MovieController@show']);
 
     $router->get('/movies/{id}/comments', ['uses' => 'MovieCommentController@index']);
-    $router->post('/movies/{id}/comments', ['middleware' => 'api', 'uses' => 'MovieCommentController@store']);
+    $router->post('/movies/{id}/comments', ['uses' => 'MovieCommentController@store']);
     $router->get('/movies/{id}/comments/{commentId}', ['uses' => 'MovieCommentController@show']);
 
     $router->get('/movies/{id}/characters', ['uses' => 'MovieCharacterController@index']);
