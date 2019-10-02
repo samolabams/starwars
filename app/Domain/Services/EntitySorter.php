@@ -11,11 +11,11 @@ class EntitySorter
      * @param string $property
      * @return array
      */
-    public function sort(array $entities, string $property, string $order): array
+    public function sort(array $entities, string $property, ?string $dir): array
     {
-        if ($order === 'asc') {
+        if (is_null($dir) || $dir === 'asc') {
             $this->sortAscending($entities, $property);
-        } else if ($order === 'desc') {
+        } else if ($dir === 'desc') {
             $this->sortDescending($entities, $property);
         }
 

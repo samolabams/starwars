@@ -104,10 +104,11 @@ class CharacterService extends AbstractService
         }
 
         if (array_key_exists('sort_by', $params)) {
-            $propertyParts = explode('.', $params['sort_by']);
-            
-            if (count($propertyParts) === 2 && in_array($propertyParts[0], $this->allowedSortFields)) {
-                $characters = (new EntitySorter)->sort($characters, $propertyParts[0], $propertyParts[1]);
+            $sort_by = $params['sort_by'];
+
+            if (in_array($sort_by, $this->allowedSortFields)) {
+                $sort_dir = array_key_exists('sort_dir', $params) ? $params['sort_dir'] : null;
+                $characters = (new EntitySorter)->sort($characters, $sort_by, $sort_dir);
             }
         }
 

@@ -32,9 +32,16 @@ class MovieCharacterController extends ApiController
      *      @OA\Parameter(
      *         name="sort_by",
      *         in="query",
-     *         description="The sort_by query: to sort by one of name, gender or height (add sort.asc to sort in ascending order, sort.desc to sort in descending order. Example: name.asc, name.desc, gender.asc, height.desc)",
+     *         description="The sort_by query: to sort by one of name, gender or height",
      *         @OA\Schema(type="string"),
-     *         example="height.desc"
+     *         example="height"
+     *      ),
+     *      @OA\Parameter(
+     *         name="sort_dir",
+     *         in="query",
+     *         description="The sort direction: to sort by one of name, gender or height (use asc to sort in ascending order, desc to sort in descending order. If this parameter is not specified, the sort direction default to asc",
+     *         @OA\Schema(type="string"),
+     *         example="asc"
      *      ),
      *      @OA\Response(
      *          response=200,
@@ -64,8 +71,13 @@ class MovieCharacterController extends ApiController
         if ($request->has('filter')) {
             $params['filter'] = $request->filter;
         }
+        
         if ($request->has('sort_by')) {
             $params['sort_by'] = $request->sort_by;
+
+            if ($request->has('sort_dir')) {
+                $params['sort_dir'] = $request->sort_dir;
+            }
         }
 
         $characters = $characterService->getAll($id, $params);
