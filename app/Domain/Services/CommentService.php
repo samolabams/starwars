@@ -52,7 +52,9 @@ class CommentService extends AbstractService
     public function getOne(int $movieId, int $commentId): Comment
     {
         $movie = $this->movieService->getOne($movieId, false);
-        $comment = $this->commentRepository->getById($movieId, $commentId);
+        $comment = $this->commentRepository->getById($commentId);
+
+        if ($comment->movie_id !== $movieId) abort(404);
 
         return $comment;
     }

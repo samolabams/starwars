@@ -23,10 +23,9 @@ class CommentRepository
                         ->count();
     }
 
-    public function getById(int $movieId, int $commentId): Comment
+    public function getById(int $commentId): Comment
     {
-        return Comment::where('movie_id', $movieId)
-                        ->where('id', $commentId)
+        return Comment::where('id', $commentId)
                         ->firstOrFail();
     }
 

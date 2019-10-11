@@ -38,5 +38,9 @@ class Comment extends Model
         'commented_at',
     ];
 
+    protected $casts = [
+        'movie_id' => 'int',
+    ];
+
     public $timestamps = false;
 }
